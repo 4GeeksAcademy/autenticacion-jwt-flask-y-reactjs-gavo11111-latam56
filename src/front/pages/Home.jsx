@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Home = () => {
@@ -15,7 +15,7 @@ export const Home = () => {
 			const response = await fetch(backendUrl + "/api/hello")
 			const data = await response.json()
 
-			if (response.ok) dispatch({ type: "set_hello", payload: data.message })
+			if (response.ok) dispatch({ type: "set_welcome", payload: data.message })
 
 			return data
 
@@ -28,16 +28,18 @@ export const Home = () => {
 
 	}
 
+	const signup = () => {
+    fetch('https://lifeless-hex-wv6rg5xx9wgc5wp6-3001.app.github.dev/api/users')
+}  
+
 	useEffect(() => {
 		loadMessage()
 	}, [])
 
 	return (
 		<div className="text-center mt-5">
-			<h1 className="display-4">Hello Rigo!!</h1>
-			<p className="lead">
-				<img src={rigoImageUrl} className="img-fluid rounded-circle mb-3" alt="Rigo Baby" />
-			</p>
+			<h1 className="display-4">WELCOME TO MY FLASH FAN PAGE</h1>
+	        <img src="https://mlpnk72yciwc.i.optimole.com/cqhiHLc.IIZS~2ef73/w:auto/h:auto/q:75/https://bleedingcool.com/wp-content/uploads/2023/02/Fo3OBYZXwAckI57.jpg" width="100%" alt="The Flash Homepage" />
 			<div className="alert alert-info">
 				{store.message ? (
 					<span>{store.message}</span>
