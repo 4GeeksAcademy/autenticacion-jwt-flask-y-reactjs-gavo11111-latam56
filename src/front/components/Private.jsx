@@ -13,7 +13,7 @@ async function fetchProtectedData() {
 
   try {
       const response = await fetch(
-        "https://infamous-ghost-g4prgj5v6gwr2v45j-3001.app.github.dev/api/users",
+         `${import.meta.env.VITE_BACKEND_URL}api/users`,   
         {
           method: "GET", 
           headers: {

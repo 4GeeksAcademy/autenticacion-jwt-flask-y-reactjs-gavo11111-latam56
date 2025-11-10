@@ -29,6 +29,12 @@ def create_user():
     email = data.get('email')
     password = data.get('password')
 
+    query = db.select(User).filter_by(email=email)  
+    result = db.session.execute(query).scalars().first()
+
+    if result:
+        return jsonify("Email already exist"), 400
+
     password_hash = generate_password_hash(password)
     new_user = User(email=email, password=password_hash, is_active=True)  # hash de la contraseña
 
@@ -87,17 +93,3 @@ def private():
 
 
 
-# def login():
-#     query = db.select(User).filter_by(email=email)
-#     result = db.session.execute(query).scalars().first()
-
-#     if result is None:
-#         return jsonify({"message": "CREDENCIALES NO VÁLIDAS"}), 400
-    
-#     user = result 
-#     password_is_valid = check_password_hash(user.password, password)
-#     if not password_is_valid:
-#         return jsonify({"message": "CREDENCIALES NO VÁLIDAS"}), 400
-    
-
-#     return jsonify(result.serialize()), 200

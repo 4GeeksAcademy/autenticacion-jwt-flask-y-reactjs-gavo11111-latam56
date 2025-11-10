@@ -9,11 +9,11 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signup data:", { email, name, password });
+    console.log("Signup data:", { email, name });
 
     try {
       const response = await fetch(
-        "https://infamous-ghost-g4prgj5v6gwr2v45j-3001.app.github.dev/api/users",
+        `${import.meta.env.VITE_BACKEND_URL}api/users`,
         {
           method: "POST",
           headers: {
@@ -28,7 +28,6 @@ const Signup = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Usuario creado:", data);
 
         
         dispatch({ type: "set_email", payload: email });

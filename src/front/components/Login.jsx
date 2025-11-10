@@ -12,11 +12,11 @@ const Login = () => {
 
    
 
-    console.log("Login data:", { email, password });
+    console.log("Login data:", { email });
 
     try {
       const response = await fetch(
-        "https://infamous-ghost-g4prgj5v6gwr2v45j-3001.app.github.dev/api/tokens",
+        `${import.meta.env.VITE_BACKEND_URL}api/tokens`,  
         {
           method: "POST", 
           headers: {
@@ -29,10 +29,9 @@ const Login = () => {
           }),
         }
       );
-console.log(response);
+
       if (response.ok) {
         const data = await response.json();
-        console.log("Usuario creado:", data);
         tokenValidation(data.token);
         
         
@@ -50,11 +49,11 @@ console.log(response);
 
   const tokenValidation = async (token) => {
 
-    console.log("Login data:", { email, password });
+    console.log("Login data:", { email });
 
     try {
       const response = await fetch(
-        "https://infamous-ghost-g4prgj5v6gwr2v45j-3001.app.github.dev/api/users",
+        `${import.meta.env.VITE_BACKEND_URL}api/users`,  
         {
           method: "GET", 
           headers: {
@@ -68,7 +67,6 @@ console.log(response);
         const data = await response.json();
         dispatch({type:"set_token", payload: token});
         dispatch({type:"set_email", payload: email});
-        console.log("Has iniciado sesión correctamente:", data);
         alert("Has iniciado sesión correctamente");
         navigate("/private");
         return data;
